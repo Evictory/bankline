@@ -1,6 +1,7 @@
 package model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="tb_user")
@@ -13,6 +14,9 @@ public class User {
     private String name;
     private String cpf;
     private String password;
+
+    @OneToMany(mappedBy = "account", cascade = CascadeType.PERSIST)
+    private List<Account> accounts;
 
     public int getId() {
         return id;
@@ -49,4 +53,13 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public List<Account> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(List<Account> accounts) {
+        this.accounts = accounts;
+    }
+
 }
