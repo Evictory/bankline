@@ -5,7 +5,7 @@ public enum AccountType {
     SA ("Conta Poupança"),
     CC ("Cartão de Crédito");
 
-    private String name;
+    public String name;
 
     AccountType(String name) {
         this.name = name;

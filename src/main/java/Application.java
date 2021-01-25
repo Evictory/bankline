@@ -5,8 +5,7 @@ import service.UserService;
 import java.util.ArrayList;
 import java.util.List;
 
-import static enums.AccountType.CA;
-import static enums.AccountType.CC;
+import static enums.AccountType.*;
 
 public class Application {
     public static void main(String[] args) {
@@ -16,17 +15,19 @@ public class Application {
         Account account2 = new Account();
         List<Account> accounts = new ArrayList<>();
 
-        usuario1.setLogin("leticia1");
-        usuario1.setCpf("11122233344");
-        usuario1.setName("Leticia Leticia");
-        usuario1.setPassword("22");
+        usuario1.setLogin("emerson2");
+        usuario1.setCpf("222333222");
+        usuario1.setName("Emerson Vitorio");
+        usuario1.setPassword("2322232");
 
-        account1.setInitials(CA.name());
-        account1.setName(CA);
+        System.out.println(CA.name);
+
+        account1.setInitials(CA);
+        account1.setName(CA.name);
         account1.setBalance(25.30);
 
-        account2.setInitials(CC.name());
-        account2.setName(CC);
+        account2.setInitials(CC);
+        account2.setName(CC.name);
         account2.setBalance(37.80);
 
         accounts.add(account1);
