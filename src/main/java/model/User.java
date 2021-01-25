@@ -1,22 +1,28 @@
 package model;
 
+import org.hibernate.annotations.NaturalId;
+
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name="tb_user")
-public class User {
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @NaturalId
     private String login;
     private String name;
     private String cpf;
     private String password;
 
-    @OneToMany(mappedBy = "account", cascade = CascadeType.PERSIST)
-    private List<Account> accounts;
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinColumn(name="user_login", referencedColumnName = "login")
+    private List<Account> accounts = new ArrayList<>();
 
     public int getId() {
         return id;
@@ -54,12 +60,8 @@ public class User {
         this.password = password;
     }
 
-    public List<Account> getAccounts() {
-        return accounts;
+    public void addAccounts(List<Account> accounts) {
+        this.accounts.addAll(accounts);
+        accounts.forEach(account -> account.setUser(this));
     }
-
-    public void setAccounts(List<Account> accounts) {
-        this.accounts = accounts;
-    }
-
 }
