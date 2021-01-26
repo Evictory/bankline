@@ -10,12 +10,13 @@ import java.util.List;
 @Entity
 @Table(name="tb_user")
 public class User implements Serializable {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     @NaturalId
     private String login;
+
     private String name;
     private String cpf;
     private String password;
@@ -63,5 +64,9 @@ public class User implements Serializable {
     public void addAccounts(List<Account> accounts) {
         this.accounts.addAll(accounts);
         accounts.forEach(account -> account.setUser(this));
+    }
+
+    public List<Account> getAccounts(){
+        return this.accounts;
     }
 }
