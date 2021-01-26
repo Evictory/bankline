@@ -1,8 +1,10 @@
+import enums.AccountType;
 import enums.TransactionType;
 import model.Account;
 import model.ChartOfAccount;
 import model.Transaction;
 import model.User;
+import repository.UserRepository;
 import service.ChartOfAccountService;
 import service.TransactionService;
 import service.UserService;
@@ -15,9 +17,13 @@ import static enums.AccountType.*;
 
 public class Application {
     public static void main(String[] args) {
-        User user = createUser(createAccounts());
-        ChartOfAccount chartOfAccount = createChartOfAccount();
-        createTransaction(user.getAccounts().get(0), chartOfAccount);
+
+        UserRepository repository = new UserRepository();
+
+        System.out.println(repository.findByLoginAndType("EmersonTransaction", CA));
+//        User user = createUser(createAccounts());
+//        ChartOfAccount chartOfAccount = createChartOfAccount();
+//        createTransaction(user.getAccounts().get(0), chartOfAccount);
     }
 
     public static List<Account> createAccounts(){
