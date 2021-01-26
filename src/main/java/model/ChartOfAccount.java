@@ -9,6 +9,7 @@ import java.util.List;
 @Table(name="tb_chart_of_account")
 public class ChartOfAccount {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name="description")
