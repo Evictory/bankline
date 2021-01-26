@@ -69,4 +69,5 @@ public class User implements Serializable {
     public List<Account> getAccounts(){
         return this.accounts;
     }
+
 }

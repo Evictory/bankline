@@ -17,7 +17,7 @@ public class ChartOfAccount {
 
     @Enumerated(EnumType.STRING)
     @Column(name="type")
-    private Enum<TransactionType> type;
+    private TransactionType type;
 
     @OneToMany(cascade = CascadeType.PERSIST)
     @JoinColumn(name="chart_of_account_id")
@@ -39,7 +39,7 @@ public class ChartOfAccount {
         return type;
     }
 
-    public void setTransactionType(Enum<TransactionType> type) {
+    public void setTransactionType(TransactionType type) {
         this.type = type;
     }
 
