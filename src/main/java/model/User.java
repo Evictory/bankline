@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="tb_user")
+@Table(name="tb_user", uniqueConstraints = @UniqueConstraint(columnNames = {"login"}, name = "uk_user_login"))
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +24,9 @@ public class User implements Serializable {
     @OneToMany(cascade = CascadeType.PERSIST)
     @JoinColumn(name="user_login", referencedColumnName = "login")
     private List<Account> accounts = new ArrayList<>();
+
+    @Embedded
+    private DateUseful date = new DateUseful();
 
     public int getId() {
         return id;
@@ -64,6 +67,14 @@ public class User implements Serializable {
     public void addAccounts(List<Account> accounts) {
         this.accounts.addAll(accounts);
         accounts.forEach(account -> account.setUser(this));
+    }
+
+    public DateUseful getDate() {
+        return date;
+    }
+
+    public void setDate(DateUseful date) {
+        this.date = date;
     }
 
     public List<Account> getAccounts(){

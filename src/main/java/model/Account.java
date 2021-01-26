@@ -29,6 +29,9 @@ public class Account implements Serializable {
     @JoinColumn(name="account_id")
     private List<Transaction> transactions = new ArrayList<>();
 
+    @Embedded
+    private DateUseful date = new DateUseful();
+
     public int getId() {
         return id;
     }
@@ -68,6 +71,14 @@ public class Account implements Serializable {
     public void addTransactions(List<Transaction> transactions) {
         this.transactions.addAll(transactions);
         transactions.forEach(transaction -> transaction.setAccount(this));
+    }
+
+    public DateUseful getDate() {
+        return date;
+    }
+
+    public void setDate(DateUseful date) {
+        this.date = date;
     }
 
     @Override
