@@ -21,17 +21,18 @@ import service.UserService;
 public class Application {
     public static void main(String[] args) {
 
-        createUser(createAccounts());
-        Account account = findAccountByLoginAndType("NovoEmerson", CA);
+//        createUser(createAccounts());
+//
+        Account accountSaved = findAccountByLoginAndType("NovoEmerson", CA);
         ChartOfAccount chartOfAccount = createChartOfAccount();
 
-        createTransaction(account, chartOfAccount);
+        createTransaction(accountSaved, chartOfAccount);
     }
 
     public static Account findAccountByLoginAndType(String login, AccountType type){
-        AccountService accountService = new AccountService();
+        AccountService service = new AccountService();
 
-        return accountService.findAccountByLoginAndType(login, type);
+        return service.findAccountByLoginAndType(login, type);
     }
 
     public static List<Account> createAccounts(){
@@ -88,7 +89,6 @@ public class Application {
 
         transaction.setAccount(account);
         transaction.setTransactionType(TransactionType.EXPENDITURE);
-        transaction.setDate(LocalDate.now());
         transaction.setValue(525.22);
         transaction.setDescription("Gastos no futuro");
         transaction.setChartOfAccount(chartOfAccount);

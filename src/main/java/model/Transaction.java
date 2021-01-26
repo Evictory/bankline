@@ -28,7 +28,21 @@ public class Transaction {
     private String accountDestination;
     private Double value;
     private String description;
-    private LocalDate date;
+
+    @Embedded
+    private DateUseful date = new DateUseful();
+
+    public Transaction() {}
+
+    public Transaction(Account account, ChartOfAccount chartOfAccount, TransactionType transactionType, String accountDestination, Double value, String description, DateUseful date) {
+        this.account = account;
+        this.chartOfAccount = chartOfAccount;
+        this.transactionType = transactionType;
+        this.accountDestination = accountDestination;
+        this.value = value;
+        this.description = description;
+        this.date = date;
+    }
 
     public Long getId() {
         return id;
@@ -82,12 +96,7 @@ public class Transaction {
         this.description = description;
     }
 
-    public LocalDate getDate() {
+    public DateUseful getDate() {
         return date;
     }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
 }

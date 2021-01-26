@@ -23,6 +23,18 @@ public class ChartOfAccount {
     @JoinColumn(name="chart_of_account_id")
     private List<Transaction> transactions;
 
+    @Embedded
+    private DateUseful date = new DateUseful();
+
+    public ChartOfAccount() {}
+
+    public ChartOfAccount(String chartOfAccount, TransactionType type, List<Transaction> transactions, DateUseful date) {
+        this.chartOfAccount = chartOfAccount;
+        this.type = type;
+        this.transactions = transactions;
+        this.date = date;
+    }
+
     public Long getId() {
         return id;
     }
@@ -46,5 +58,21 @@ public class ChartOfAccount {
     public void addTransactions(List<Transaction> transactions) {
         this.transactions.addAll(transactions);
         transactions.forEach(transaction -> transaction.setChartOfAccount(this));
+    }
+
+    public TransactionType getType() {
+        return type;
+    }
+
+    public void setType(TransactionType type) {
+        this.type = type;
+    }
+
+    public DateUseful getDate() {
+        return date;
+    }
+
+    public void setDate(DateUseful date) {
+        this.date = date;
     }
 }
