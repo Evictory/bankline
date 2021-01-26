@@ -22,7 +22,7 @@ public class Transaction {
 
     @Enumerated(EnumType.STRING)
     @Column(name="transaction_type")
-    private Enum<TransactionType> transactionType;
+    private TransactionType transactionType;
 
     @Column(name="account_destination")
     private String accountDestination;
@@ -54,7 +54,7 @@ public class Transaction {
         return transactionType;
     }
 
-    public void setTransactionType(Enum<TransactionType> transactionType) {
+    public void setTransactionType(TransactionType transactionType) {
         this.transactionType = transactionType;
     }
 
@@ -89,4 +89,5 @@ public class Transaction {
     public void setDate(LocalDate date) {
         this.date = date;
     }
+
 }

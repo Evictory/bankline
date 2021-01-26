@@ -1,29 +1,37 @@
-import enums.AccountType;
-import enums.TransactionType;
-import model.Account;
-import model.ChartOfAccount;
-import model.Transaction;
-import model.User;
-import repository.UserRepository;
-import service.ChartOfAccountService;
-import service.TransactionService;
-import service.UserService;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import enums.TransactionType;
+import enums.AccountType;
 import static enums.AccountType.*;
+
+
+import model.Account;
+import model.ChartOfAccount;
+import model.Transaction;
+import model.User;
+
+import service.AccountService;
+import service.ChartOfAccountService;
+import service.TransactionService;
+import service.UserService;
+
 
 public class Application {
     public static void main(String[] args) {
 
-        UserRepository repository = new UserRepository();
+        createUser(createAccounts());
+        Account account = findAccountByLoginAndType("NovoEmerson", CA);
+        ChartOfAccount chartOfAccount = createChartOfAccount();
 
-        System.out.println(repository.findByLoginAndType("EmersonTransaction", CA));
-//        User user = createUser(createAccounts());
-//        ChartOfAccount chartOfAccount = createChartOfAccount();
-//        createTransaction(user.getAccounts().get(0), chartOfAccount);
+        createTransaction(account, chartOfAccount);
+    }
+
+    public static Account findAccountByLoginAndType(String login, AccountType type){
+        AccountService accountService = new AccountService();
+
+        return accountService.findAccountByLoginAndType(login, type);
     }
 
     public static List<Account> createAccounts(){

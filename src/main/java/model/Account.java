@@ -18,7 +18,7 @@ public class Account implements Serializable {
     private String name;
 
     @Enumerated(EnumType.STRING)
-    private Enum<AccountType> initials;
+    private AccountType initials;
     private Double balance;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -45,7 +45,7 @@ public class Account implements Serializable {
         return initials;
     }
 
-    public void setInitials(Enum<AccountType> initials) {
+    public void setInitials(AccountType initials) {
         this.initials = initials;
     }
 
@@ -68,5 +68,17 @@ public class Account implements Serializable {
     public void addTransactions(List<Transaction> transactions) {
         this.transactions.addAll(transactions);
         transactions.forEach(transaction -> transaction.setAccount(this));
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", initials=" + initials +
+                ", balance=" + balance +
+                ", user=" + user +
+                ", transactions=" + transactions +
+                '}';
     }
 }
