@@ -4,11 +4,10 @@ import util.ConnectionFactoryUseful;
 import javax.persistence.EntityManager;
 
 public class CrudRepository <T>{
-    //dá para criar um entitymanager protected e passar para os demais repositórios
+    protected EntityManager entityManager = ConnectionFactoryUseful.getConnection();
     protected void save(T data){
-        EntityManager connection = ConnectionFactoryUseful.getConnection();
-        connection.getTransaction().begin();
-        connection.persist(data);
-        connection.getTransaction().commit();
+        entityManager.getTransaction().begin();
+        entityManager.persist(data);
+        entityManager.getTransaction().commit();
     }
 }
