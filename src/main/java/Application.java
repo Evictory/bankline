@@ -3,6 +3,7 @@ import model.Account;
 import model.ChartOfAccount;
 import model.Transaction;
 import model.User;
+import service.ChartOfAccountService;
 import service.TransactionService;
 import service.UserService;
 
@@ -15,8 +16,8 @@ import static enums.AccountType.*;
 public class Application {
     public static void main(String[] args) {
         User user = createUser(createAccounts());
-        createTransaction(user.getAccounts().get(0));
-
+        ChartOfAccount chartOfAccount = createChartOfAccount();
+        createTransaction(user.getAccounts().get(0), chartOfAccount);
     }
 
     public static List<Account> createAccounts(){
@@ -43,7 +44,7 @@ public class Application {
         User user = new User();
         UserService service = new UserService();
 
-        user.setLogin("EmersonTransaction");
+        user.setLogin("NovoEmerson");
         user.setCpf("222333222");
         user.setName("Emerson Transação");
         user.setPassword("2322232");
@@ -56,16 +57,18 @@ public class Application {
     }
 
     public static ChartOfAccount createChartOfAccount(){
+        ChartOfAccountService service = new ChartOfAccountService();
         ChartOfAccount chartOfAccount = new ChartOfAccount();
 
-        chartOfAccount.setChartOfAccount("Despesas médicas");
+        chartOfAccount.setChartOfAccount("Despesas educacionais");
         chartOfAccount.setTransactionType(TransactionType.EXPENDITURE);
 
-        return chartOfAccount;
+        service.save(chartOfAccount);
 
+        return chartOfAccount;
     }
 
-    public static void createTransaction(Account account){
+    public static void createTransaction(Account account, ChartOfAccount chartOfAccount){
         Transaction transaction = new Transaction();
         TransactionService service = new TransactionService();
 
@@ -73,7 +76,8 @@ public class Application {
         transaction.setTransactionType(TransactionType.EXPENDITURE);
         transaction.setDate(LocalDate.now());
         transaction.setValue(525.22);
-        transaction.setDescription("Gastos sem futuro");
+        transaction.setDescription("Gastos no futuro");
+        transaction.setChartOfAccount(chartOfAccount);
 
         service.save(transaction);
     }
