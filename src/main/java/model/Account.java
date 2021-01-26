@@ -32,6 +32,17 @@ public class Account implements Serializable {
     @Embedded
     private DateUseful date = new DateUseful();
 
+    public Account() {}
+
+    public Account(String name, AccountType initials, Double balance, User user, List<Transaction> transactions, DateUseful date) {
+        this.name = name;
+        this.initials = initials;
+        this.balance = balance;
+        this.user = user;
+        this.transactions = transactions;
+        this.date = date;
+    }
+
     public int getId() {
         return id;
     }

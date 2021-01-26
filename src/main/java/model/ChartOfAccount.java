@@ -26,6 +26,15 @@ public class ChartOfAccount {
     @Embedded
     private DateUseful date = new DateUseful();
 
+    public ChartOfAccount() {}
+
+    public ChartOfAccount(String chartOfAccount, TransactionType type, List<Transaction> transactions, DateUseful date) {
+        this.chartOfAccount = chartOfAccount;
+        this.type = type;
+        this.transactions = transactions;
+        this.date = date;
+    }
+
     public Long getId() {
         return id;
     }

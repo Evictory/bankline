@@ -28,6 +28,17 @@ public class User implements Serializable {
     @Embedded
     private DateUseful date = new DateUseful();
 
+    public User() {}
+
+    public User(String login, String name, String cpf, String password, List<Account> accounts, DateUseful date) {
+        this.login = login;
+        this.name = name;
+        this.cpf = cpf;
+        this.password = password;
+        this.accounts = accounts;
+        this.date = date;
+    }
+
     public int getId() {
         return id;
     }

@@ -32,6 +32,18 @@ public class Transaction {
     @Embedded
     private DateUseful date = new DateUseful();
 
+    public Transaction() {}
+
+    public Transaction(Account account, ChartOfAccount chartOfAccount, TransactionType transactionType, String accountDestination, Double value, String description, DateUseful date) {
+        this.account = account;
+        this.chartOfAccount = chartOfAccount;
+        this.transactionType = transactionType;
+        this.accountDestination = accountDestination;
+        this.value = value;
+        this.description = description;
+        this.date = date;
+    }
+
     public Long getId() {
         return id;
     }
