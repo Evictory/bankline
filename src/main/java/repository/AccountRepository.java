@@ -4,6 +4,7 @@ import enums.AccountType;
 import model.Account;
 
 import javax.persistence.TypedQuery;
+import java.util.List;
 
 public class AccountRepository extends CrudRepository {
     public AccountRepository(){
@@ -23,5 +24,15 @@ public class AccountRepository extends CrudRepository {
         Account account = query.getSingleResult();
 
         return account;
+    }
+
+    public List<Account> getTotalBalanceByLogin(String login){
+        String select = "select a from Account a where a.user.login = :login";
+        TypedQuery<Account> query = this.entityManager.createQuery(select, Account.class);
+
+        query.setParameter("login", login);
+        List<Account> accounts = query.getResultList();
+
+        return accounts;
     }
 }
