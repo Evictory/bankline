@@ -22,7 +22,7 @@ public class Application {
     public static void main(String[] args) {
 
 //        createUser(createAccounts());
-//
+
         Account accountSaved = findAccountByLoginAndType("NovoEmerson", CA);
         ChartOfAccount chartOfAccount = createChartOfAccount();
 
